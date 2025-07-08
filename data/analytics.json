@@ -1,0 +1,100 @@
+{
+  "monthly": [
+    { "month": "Jan", "sent": 450000, "received": 380000 },
+    { "month": "Feb", "sent": 520000, "received": 420000 },
+    { "month": "Mar", "sent": 480000, "received": 460000 },
+    { "month": "Apr", "sent": 610000, "received": 490000 },
+    { "month": "May", "sent": 580000, "received": 520000 },
+    { "month": "Jun", "sent": 650000, "received": 580000 },
+    { "month": "Jul", "sent": 720000, "received": 640000 },
+    { "month": "Aug", "sent": 680000, "received": 620000 },
+    { "month": "Sep", "sent": 590000, "received": 570000 },
+    { "month": "Oct", "sent": 630000, "received": 590000 },
+    { "month": "Nov", "sent": 750000, "received": 680000 },
+    { "month": "Dec", "sent": 820000, "received": 760000 }
+  ],
+  "inventory": [
+    { "category": "Food & Beverages", "transferred": 12500, "total": 45000 },
+    { "category": "Health & Wellness", "transferred": 8200, "total": 28000 },
+    { "category": "Home Essentials", "transferred": 6800, "total": 32000 },
+    { "category": "Electronics", "transferred": 4200, "total": 18000 },
+    { "category": "Clothing", "transferred": 5600, "total": 25000 },
+    { "category": "Auto & Tires", "transferred": 3100, "total": 15000 }
+  ],
+  "health": [
+    { "status": "In Stock", "count": 18750, "percentage": 75 },
+    { "status": "Low Stock", "count": 4375, "percentage": 17.5 },
+    { "status": "Critical", "count": 1875, "percentage": 7.5 }
+  ],
+  "expiry": [
+    {
+      "id": "EXP001",
+      "name": "Organic Milk 2% - 1 Gallon",
+      "category": "Food & Beverages",
+      "expiryDate": "2025-07-15",
+      "daysUntilExpiry": 7,
+      "quantity": 45,
+      "location": "DC-001-A12"
+    },
+    {
+      "id": "EXP002",
+      "name": "Fresh Strawberries - 16oz",
+      "category": "Food & Beverages",
+      "expiryDate": "2025-07-12",
+      "daysUntilExpiry": 4,
+      "quantity": 28,
+      "location": "DC-002-B08"
+    },
+    {
+      "id": "EXP003",
+      "name": "Whole Wheat Bread",
+      "category": "Food & Beverages",
+      "expiryDate": "2025-07-20",
+      "daysUntilExpiry": 12,
+      "quantity": 67,
+      "location": "DC-001-C15"
+    },
+    {
+      "id": "EXP004",
+      "name": "Greek Yogurt - Mixed Berry",
+      "category": "Food & Beverages",
+      "expiryDate": "2025-07-18",
+      "daysUntilExpiry": 10,
+      "quantity": 89,
+      "location": "DC-003-A05"
+    },
+    {
+      "id": "EXP005",
+      "name": "Vitamin D3 Supplements",
+      "category": "Health & Wellness",
+      "expiryDate": "2025-08-05",
+      "daysUntilExpiry": 28,
+      "quantity": 156,
+      "location": "DC-001-D22"
+    },
+    {
+      "id": "EXP006",
+      "name": "Frozen Pizza - Supreme",
+      "category": "Food & Beverages",
+      "expiryDate": "2025-07-25",
+      "daysUntilExpiry": 17,
+      "quantity": 234,
+      "location": "DC-002-F11"
+    },
+    {
+      "id": "EXP007",
+      "name": "Baby Formula - Stage 1",
+      "category": "Health & Wellness",
+      "expiryDate": "2025-08-12",
+      "daysUntilExpiry": 35,
+      "quantity": 78,
+      "location": "DC-001-G09"
+    }
+  ],
+  "summary": {
+    "totalInventory": 163000,
+    "monthlyCost": 760000,
+    "itemsShipped": 28400,
+    "itemsReceived": 31200
+  }
+}
