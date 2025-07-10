@@ -96,7 +96,7 @@ function RequestSuccessPopup({ isOpen, onClose, requestData }: RequestSuccessPop
             <span className="font-medium">Status:</span> Processing
           </p>
           <p className="text-blue-700 text-sm">
-            <span className="font-medium">Expected Response:</span> Within 2-4 hours
+            <span className="font-medium">Expected Response:</span> Within 30 minutes
           </p>
         </div>
 
