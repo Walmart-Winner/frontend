@@ -5,7 +5,7 @@ import { useState } from 'react';
 import {
   Home,
   Package,
-  MapPin,
+  Truck,
   BarChart3,
   ChevronLeft,
   ChevronRight,
@@ -19,6 +19,7 @@ export default function Sidebar() {
     { name: 'Home', href: '/', icon: <Home className="w-5 h-5" /> },
     { name: 'Request Stock', href: '/request', icon: <Package className="w-5 h-5" /> },
     { name: 'Analytics', href: '/analytics', icon: <BarChart3 className="w-5 h-5" /> },
+    { name: 'Shipments', href: '/shipments', icon: <Truck className="w-5 h-5" /> },
     { name: 'Chat with PulseBot', href: '/aiModel', icon: <Bot className="w-5 h-5" /> }
   ];
 
