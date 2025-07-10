@@ -18,7 +18,6 @@ export default function Sidebar() {
   const navItems = [
     { name: 'Home', href: '/', icon: <Home className="w-5 h-5" /> },
     { name: 'Request Stock', href: '/request', icon: <Package className="w-5 h-5" /> },
-    { name: 'Nearby Stores', href: '/nearby', icon: <MapPin className="w-5 h-5" /> },
     { name: 'Analytics', href: '/analytics', icon: <BarChart3 className="w-5 h-5" /> },
     { name: 'Stock with AI', href: '/aiModel', icon: <Bot className="w-5 h-5" /> }
   ];
