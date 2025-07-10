@@ -28,7 +28,7 @@ const WalmartAIDashboard: React.FC = () => {
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: '1',
-      text: 'Hello! I\'m your Walmart AI assistant. I can help you with store operations, inventory management, and sales insights.',
+      text: 'Hello! I\'m PulseBot. I can assist you in managing store operations, inventory management, and sales insights. How can I help you today?',
       sender: 'ai',
       timestamp: new Date()
     }
@@ -206,17 +206,17 @@ const WalmartAIDashboard: React.FC = () => {
       <div className=" text-white px-6 py-4 shadow-sm">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-4xl font-extrabold text-blue-800">Walmart AI Operations Dashboard</h1>
+            <h1 className="text-4xl font-extrabold text-blue-800">Chat with PulseBot</h1>
             <p className="text-blue-800 text-sm">Intelligent insights for smarter retail decisions</p>
           </div>
           <div className="flex items-center space-x-6 text-sm">
             <div className="flex items-center">
-              <Store className="w-4 h-4 mr-1 text-blue-700" />
-              <span className=' text-blue-800'>347 Stores</span>
+              {/* <Store className="w-4 h-4 mr-1 text-blue-700" /> */}
+              {/* <span className=' text-blue-800'>347 Stores</span> */}
             </div>
             <div className="flex items-center">
-              <Users className="w-4 h-4 mr-1 text-blue-800" />
-              <span className=' text-blue-800'>Live</span>
+              {/* <Users className="w-4 h-4 mr-1 text-blue-800" />
+              <span className=' text-blue-800'>Live</span> */}
             </div>
           </div>
         </div>

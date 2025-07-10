@@ -24,7 +24,7 @@ const SummaryCards: React.FC<SummaryCardsProps> = ({ data }) => {
       color: 'blue'
     },
     {
-      title: 'Monthly Cost',
+      title: 'Monthly Revenue',
       value: `₹${(data.monthlyCost / 1000).toFixed(0)}K`,
       change: '-1.2%',
       changeType: 'negative' as const,

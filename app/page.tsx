@@ -53,7 +53,9 @@ export default function WalmartHomepage() {
 
         {/* Intro */}
         <section className="mb-10 text-left">
-          <h1 className="text-3xl font-bold text-blue-900 mb-2">Supply Chain Operations Center</h1>
+          {/* <h1 className="text-3xl font-bold text-blue-900 mb-2">Supply Chain Operations Center</h1> */}
+          <h1 className="text-4xl font-extrabold text-blue-800">Pulse Dashboard</h1>
+            <br></br>
           <p className="text-gray-700 max-w-3xl">
             Manage inter-store logistics, streamline warehouse coordination, and resolve stock imbalances
             with real-time insight into Walmart’s internal distribution network.

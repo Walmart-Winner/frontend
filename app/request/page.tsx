@@ -2,7 +2,7 @@
 const StoreMap = dynamic(() => import("../../components/StoreMap"), { ssr: false });
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
-import { X, CheckCircle, Package } from "lucide-react";
+import { X, CheckCircle, Package, Space } from "lucide-react";
 import RequestedItemsList from "@/components/RequestItemsList";
 // Mock data
 const mockRequests = [
@@ -334,7 +334,12 @@ export default function RequestStockPage() {
 
   return (
     <div className="max-w-3xl mx-auto py-8">
-      <h1 className="text-3xl font-bold text-blue-800 mb-4">Request Stock</h1>
+      {/* <h1 className="text-3xl font-bold text-blue-800 mb-4">Request Stock</h1> */}
+      {/* <div> */}
+            <h1 className="text-4xl font-extrabold text-blue-800">Request Stock</h1>
+            <br></br>
+            {/* <p className="text-blue-800 text-sm">Intelligent insights for smarter retail decisions</p>
+          </div> */}
       <SummaryCards summary={mockSummary} />
       <RecommendedProducts products={recommendedProducts} onRequest={handleRecommendedRequest} />
       <RequestsInbox requests={requests} onAction={handleRequestAction} />
