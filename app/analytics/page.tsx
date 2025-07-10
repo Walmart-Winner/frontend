@@ -145,7 +145,7 @@ export default async function AnalyticsPage() {
         <div className="mb-10 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div>
             <h1 className="text-4xl font-extrabold text-blue-900 tracking-tight mb-2">
-              SCM Ops Dashboard – Internal Access
+              Pulse Metrics – Internal Access
             </h1>
             <p className="text-lg text-blue-700 font-medium">
               Live metrics on inventory transfers, fulfillment health, and cost activity

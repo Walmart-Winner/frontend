@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import { Package, DollarSign, TrendingUp, TrendingDown } from 'lucide-react';
+import { Package, DollarSign, TrendingUp, TrendingDown, IndianRupee } from 'lucide-react';
 
 interface SummaryData {
   totalInventory: number;
@@ -24,8 +24,8 @@ const SummaryCards: React.FC<SummaryCardsProps> = ({ data }) => {
       color: 'blue'
     },
     {
-      title: 'Monthly Cost',
-      value: `$${(data.monthlyCost / 1000).toFixed(0)}K`,
+      title: 'Monthly Revenue',
+      value: `₹${(data.monthlyCost / 1000).toFixed(0)}K`,
       change: '-1.2%',
       changeType: 'negative' as const,
       icon: DollarSign,
@@ -69,7 +69,7 @@ const SummaryCards: React.FC<SummaryCardsProps> = ({ data }) => {
           <div className="flex items-center justify-between">
             <div className="flex-1">
               <p className="text-sm text-gray-600 mb-1">{card.title}</p>
-              <p className="text-2xl font-bold text-gray-900">{card.value}</p>
+              <span className="text-2xl font-bold text-gray-900">{card.value}</span>
               <div className="flex items-center mt-2">
                 <span
                   className={`text-sm font-medium ${

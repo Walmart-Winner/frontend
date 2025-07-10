@@ -1,4 +1,5 @@
 'use client';
+import { IndianRupee } from 'lucide-react';
 import React from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
@@ -14,7 +15,7 @@ interface MonthlyLineChartProps {
 
 const MonthlyLineChart: React.FC<MonthlyLineChartProps> = ({ data }) => {
   const formatCurrency = (value: number) => {
-    return `$${(value / 1000).toFixed(0)}K`;
+    return `₹ ${(value / 1000).toFixed(0)}K`;
   };
 
   const CustomTooltip = ({ active, payload, label }: any) => {
@@ -24,6 +25,7 @@ const MonthlyLineChart: React.FC<MonthlyLineChartProps> = ({ data }) => {
           <p className="font-semibold text-gray-900">{`${label} 2024`}</p>
           {payload.map((entry: any, index: number) => (
             <p key={index} style={{ color: entry.color }} className="text-sm">
+              <IndianRupee />
               {`${entry.name}: ${formatCurrency(entry.value)}`}
             </p>
           ))}

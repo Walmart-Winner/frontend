@@ -19,7 +19,7 @@ export default function Sidebar() {
     { name: 'Home', href: '/', icon: <Home className="w-5 h-5" /> },
     { name: 'Request Stock', href: '/request', icon: <Package className="w-5 h-5" /> },
     { name: 'Analytics', href: '/analytics', icon: <BarChart3 className="w-5 h-5" /> },
-    { name: 'Stock with AI', href: '/aiModel', icon: <Bot className="w-5 h-5" /> }
+    { name: 'Chat with PulseBot', href: '/aiModel', icon: <Bot className="w-5 h-5" /> }
   ];
 
   return (
@@ -32,12 +32,12 @@ export default function Sidebar() {
       <div className="flex items-center justify-between p-4 border-b border-blue-500/30">
         <div className="flex items-center space-x-3">
           <div className="w-10 h-10 bg-yellow-400 rounded-lg flex items-center justify-center">
-            <span className="text-blue-800 font-bold text-lg">W</span>
+            <span className="text-blue-800 font-bold text-lg">P</span>
           </div>
           {!collapsed && (
             <div>
-              <h2 className="text-lg font-bold text-white">Walmart SCM</h2>
-              <p className="text-yellow-300 text-xs font-medium">SmartMESH</p>
+              <h2 className="text-lg font-bold text-white">PULSE </h2>
+              <p className="text-yellow-300 text-xs font-medium">Smarter Storage</p>
             </div>
           )}
         </div>
@@ -72,7 +72,7 @@ export default function Sidebar() {
         <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-blue-500/30">
           <div className="flex items-center justify-center space-x-2">
             <div className="w-2 h-2 bg-yellow-400 rounded-full" />
-            <span className="text-sm text-blue-200">Walmart Sparkathon Exclusive</span>
+            <span className="text-sm text-blue-200">Sparkathon Exclusive</span>
           </div>
         </div>
       )}

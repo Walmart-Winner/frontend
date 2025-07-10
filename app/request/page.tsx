@@ -1,7 +1,9 @@
 "use client";
+const StoreMap = dynamic(() => import("../../components/StoreMap"), { ssr: false });
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
-
+import { X, CheckCircle, Package, Space } from "lucide-react";
+import RequestedItemsList from "@/components/RequestItemsList";
 // Mock data
 const mockRequests = [
   { id: 1, product: "Milk", from: "Warehouse A", status: "pending" },
@@ -16,10 +18,10 @@ const mockSummary = {
 };
 
 const recommendedProducts = [
-  { id: 1, name: "Milk", stock: 2, image: "/window.svg" },
-  { id: 2, name: "Eggs", stock: 5, image: "/file.svg" },
-  { id: 3, name: "Bread", stock: 1, image: "/globe.svg" },
-  { id: 4, name: "Butter", stock: 0, image: "/vercel.svg" },
+  { id: 1, name: "Milk", stock: 2, image: "/milk.png" },
+  { id: 2, name: "Eggs", stock: 5, image: "/eggs.png" },
+  { id: 3, name: "Bread", stock: 1, image: "/bread.png" },
+  { id: 4, name: "Butter", stock: 0, image: "/butter.png" },
 ];
 
 const centerLat = 28.47509000850516;
@@ -38,7 +40,84 @@ const mockStores = [
   { id: 10, name: "Store I", lat: centerLat + 0.006, lng: centerLng - 0.003 },
 ];
 
-const StoreMap = dynamic(() => import("../../components/StoreMap"), { ssr: false });
+interface RequestSuccessPopupProps {
+  isOpen: boolean;
+  onClose: () => void;
+  requestData: {
+    product: string;
+    option: string;
+    storeId?: string;
+    storeName?: string;
+  } | null;
+}
+
+function RequestSuccessPopup({ isOpen, onClose, requestData }: RequestSuccessPopupProps) {
+  if (!isOpen || !requestData) return null;
+
+  const getRequestTypeText = () => {
+    if (requestData.option === "specific" && requestData.storeName) {
+      return `from ${requestData.storeName}`;
+    }
+    return "from any nearby store";
+  };
+
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+      <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4 shadow-xl">
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center">
+            <CheckCircle className="w-6 h-6 text-green-600 mr-2" />
+            <h2 className="text-xl font-semibold text-gray-800">Request Successful!</h2>
+          </div>
+          <button
+            onClick={onClose}
+            className="text-gray-400 hover:text-gray-600 transition-colors"
+          >
+            <X className="w-5 h-5" />
+          </button>
+        </div>
+        
+        <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-4">
+          <div className="flex items-center mb-2">
+            <Package className="w-5 h-5 text-green-600 mr-2" />
+            <span className="font-medium text-green-800">Item Requested:</span>
+          </div>
+          <div className="ml-7">
+            <p className="text-green-700 font-semibold text-lg">{requestData.product}</p>
+            <p className="text-green-600 text-sm">{getRequestTypeText()}</p>
+          </div>
+        </div>
+
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-4">
+          <p className="text-blue-700 text-sm">
+            <span className="font-medium">Request ID:</span> REQ-{Date.now().toString().slice(-6)}
+          </p>
+          <p className="text-blue-700 text-sm">
+            <span className="font-medium">Status:</span> Processing
+          </p>
+          <p className="text-blue-700 text-sm">
+            <span className="font-medium">Expected Response:</span> Within 30 minutes
+          </p>
+        </div>
+
+        <div className="flex space-x-3">
+          <button
+            onClick={onClose}
+            className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+          >
+            Continue
+          </button>
+          <button
+            onClick={onClose}
+            className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+          >
+            View Requests
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 function RequestsInbox({ requests, onAction }: { requests: any[]; onAction: (id: number, action: string) => void }) {
   return (
@@ -80,30 +159,36 @@ function CreateRequest({ stores, onSubmit }: { stores: any[]; onSubmit: (data: a
   const [option, setOption] = useState("any");
   const [storeId, setStoreId] = useState(stores[0]?.id || "");
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    onSubmit({ product, option, storeId });
+  const handleSubmit = () => {
+    if (!product.trim()) return;
+    const selectedStore = stores.find(store => store.id === parseInt(storeId));
+    onSubmit({ 
+      product, 
+      option, 
+      storeId,
+      storeName: selectedStore?.name 
+    });
     setProduct("");
   };
 
   return (
     <div className="mb-8">
       <h2 className="text-xl font-semibold mb-2">Create Stock Request</h2>
-      <form onSubmit={handleSubmit} className="space-y-4 bg-white p-4 rounded shadow">
+      <div className="space-y-4 bg-white p-4 rounded shadow">
         <div>
-          <label className="block mb-1 font-medium">Product</label>
+          <div className="block mb-1 font-medium">Product</div>
           <input
             type="text"
             value={product}
             onChange={(e) => setProduct(e.target.value)}
             className="border rounded px-2 py-1 w-full"
-            required
+            placeholder="Enter product name"
           />
         </div>
         <div>
-          <label className="block mb-1 font-medium">Request Option</label>
+          <div className="block mb-1 font-medium">Request Option</div>
           <div className="flex items-center space-x-4">
-            <label className="flex items-center">
+            <div className="flex items-center">
               <input
                 type="radio"
                 name="option"
@@ -112,9 +197,9 @@ function CreateRequest({ stores, onSubmit }: { stores: any[]; onSubmit: (data: a
                 onChange={() => setOption("specific")}
                 className="mr-1"
               />
-              Request from specific store
-            </label>
-            <label className="flex items-center">
+              <span>Request from specific store</span>
+            </div>
+            <div className="flex items-center">
               <input
                 type="radio"
                 name="option"
@@ -123,13 +208,13 @@ function CreateRequest({ stores, onSubmit }: { stores: any[]; onSubmit: (data: a
                 onChange={() => setOption("any")}
                 className="mr-1"
               />
-              Request from any nearby store
-            </label>
+              <span>Request from any nearby store</span>
+            </div>
           </div>
         </div>
         {option === "specific" && (
           <div>
-            <label className="block mb-1 font-medium">Select Store</label>
+            <div className="block mb-1 font-medium">Select Store</div>
             <select
               value={storeId}
               onChange={(e) => setStoreId(e.target.value)}
@@ -144,12 +229,13 @@ function CreateRequest({ stores, onSubmit }: { stores: any[]; onSubmit: (data: a
           </div>
         )}
         <button
-          type="submit"
-          className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+          onClick={handleSubmit}
+          disabled={!product.trim()}
+          className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           Submit Request
         </button>
-      </form>
+      </div>
     </div>
   );
 }
@@ -199,25 +285,45 @@ function RecommendedProducts({ products, onRequest }: { products: any[], onReque
 export default function RequestStockPage() {
   const [requests, setRequests] = useState(mockRequests);
   const [searching, setSearching] = useState(false);
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+  const [currentRequest, setCurrentRequest] = useState<any>(null);
+  const [requestedItems, setRequestedItems] = useState<any[]>([]);
+  const handleCreateRequest = (data: any) => {
+    console.log("Request submitted:", data);
+    setCurrentRequest(data);
+    setShowSuccessPopup(true);
+    setRequestedItems((prev) => [...prev, data]);
 
+    setTimeout(() => {
+      setSearching(false);
+    }, 10000); // Simulated delay
+  };
   const handleRequestAction = (id: number, action: string) => {
     setRequests((prev) => prev.filter((req) => req.id !== id));
     // Optionally, show a toast or feedback
   };
 
-  const handleCreateRequest = (data: any) => {
-    // Here you would send the request to backend
-    // For now, just log it
-    console.log("Request submitted:", data);
-    setSearching(true);
-    setTimeout(() => {
-      setSearching(false);
-    }, 100000);
-  };
+  // const handleCreateRequest = (data: any) => {
+  //   // Here you would send the request to backend
+  //   console.log("Request submitted:", data);
+  //   setCurrentRequest(data);
+  //   setShowSuccessPopup(true);
+  //   setSearching(true);
+  //   setTimeout(() => {
+  //     setSearching(false);
+  //   }, 100000);
+  // };
 
   const handleRecommendedRequest = (product: any) => {
     // Simulate requesting a recommended product
-    handleCreateRequest({ product: product.name, option: "any", storeId: null });
+    const requestData = { product: product.name, option: "any", storeId: null, storeName: null };
+    handleCreateRequest(requestData);
+  };
+
+  const closeSuccessPopup = () => {
+    setSearching(true);
+    setShowSuccessPopup(false);
+    setCurrentRequest(null);
   };
 
   const [showMap, setShowMap] = useState(false);
@@ -228,11 +334,24 @@ export default function RequestStockPage() {
 
   return (
     <div className="max-w-3xl mx-auto py-8">
-      <h1 className="text-3xl font-bold text-blue-800 mb-4">Request Stock</h1>
+      {/* <h1 className="text-3xl font-bold text-blue-800 mb-4">Request Stock</h1> */}
+      {/* <div> */}
+            <h1 className="text-4xl font-extrabold text-blue-800">Request Stock</h1>
+            <br></br>
+            {/* <p className="text-blue-800 text-sm">Intelligent insights for smarter retail decisions</p>
+          </div> */}
       <SummaryCards summary={mockSummary} />
       <RecommendedProducts products={recommendedProducts} onRequest={handleRecommendedRequest} />
       <RequestsInbox requests={requests} onAction={handleRequestAction} />
       <CreateRequest stores={mockStores} onSubmit={handleCreateRequest} />
+      
+      {/* Success Popup */}
+      <RequestSuccessPopup 
+        isOpen={showSuccessPopup}
+        onClose={closeSuccessPopup}
+        requestData={currentRequest}
+      />
+      <RequestedItemsList items={requestedItems} />
       {showMap && <StoreMap searching={searching} />}
     </div>
   );
